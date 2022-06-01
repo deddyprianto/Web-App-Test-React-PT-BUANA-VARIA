@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useSelector } from "react-redux";
+import { createTrackedSelector } from "react-tracked";
+import { Toaster } from "react-hot-toast";
+import Home from "./components/Home";
+import Modal from "./components/Modal";
+const useTrackedSelector = createTrackedSelector(useSelector);
 
-function App() {
+const App = () => {
+  const state = useTrackedSelector();
+  const { modal } = state.app.showModal;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="w-screen h-screen">
+      <Toaster
+        position="top-left"
+        toastOptions={{
+          className: "font-popins",
+        }}
+      />
+      <Home />
+      {modal && <Modal />}
     </div>
   );
-}
+};
 
 export default App;
