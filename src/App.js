@@ -1,8 +1,8 @@
 import React from "react";
-import AppInti from "./components/AppInti";
+import Home from "./components/Home";
 
 const App = () => {
-  return <AppInti />;
+  return <Home />;
 };
 
 export default App;
