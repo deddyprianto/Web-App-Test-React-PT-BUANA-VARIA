@@ -10,9 +10,8 @@ const useTrackedSelector = createTrackedSelector(useSelector);
 const ListCat = () => {
   const state = useTrackedSelector();
   const { dataSearch } = state.app.dataDefault;
-  const [limit, setLimit] = useState(10);
   const [idDetail, setIdDetail] = useState("");
-  const { cat, isError, isLoading, setSize } = useCat(limit);
+  const { cat, isError, isLoading, setSize } = useCat();
   const observer = useRef();
 
   const lastEl = useCallback(
@@ -21,7 +20,7 @@ const ListCat = () => {
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
-          setLimit((prev) => prev + 10);
+          setSize((prev) => prev + 1);
         }
       });
       if (node) observer.current.observe(node);
@@ -56,7 +55,7 @@ const ListCat = () => {
                   return (
                     <div key={data} className="w-full flex flex-col mt-10">
                       <button
-                        onClick={() => setLimit(10)}
+                        onClick={() => setSize(10)}
                         className="w-40 flex items-center px-2 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
                       >
                         <ArrowLeftIcon className="w-5 h-5 text-white" />
