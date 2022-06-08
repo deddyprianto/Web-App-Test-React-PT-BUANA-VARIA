@@ -1,5 +1,6 @@
 import axios from "axios";
 import useSWRInfinite from "swr/infinite";
+import useSWR from "swr";
 
 export const useCat = (limit) => {
   const fetcher = (url) =>
